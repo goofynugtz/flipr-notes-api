@@ -1,1 +1,1 @@
-# 
+# Flipr DevOps coding task
