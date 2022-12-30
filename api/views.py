@@ -27,8 +27,6 @@ def createNote(request):
     description = data['description'],
   )
   serializer = NoteSerializer(note, many=False)
-  if (serializer.is_valid()):
-    serializer.save()
   return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
