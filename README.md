@@ -1,5 +1,6 @@
 # Flipr DevOps Coding task
 
+### API using django-restframework, SQLite database and Docker
 Clone this repo by
 ```bash
 git clone https://github.com/goofynugtz/Flipr-notesAPI-task.git
@@ -26,7 +27,8 @@ The application supports CRUD operations at the following endpoints
 **DELETE:** Delete by id: <http://127.0.0.1:8000/api/primary_key/delete/>  
 **PUT:** Update by id: <http://127.0.0.1:8000/api/primary_key/update/>  
 
-Check logs  
+Check running instances and logs by  
 ```bash
+docker ps
 docker logs [container_id]
 ```
