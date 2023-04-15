@@ -1,6 +1,6 @@
 # Flipr DevOps Coding task
 
-### API using django-restframework, SQLite database and Docker
+### API using django-restframework, PostgreSQL database and Docker
 Clone this repo by
 ```bash
 git clone https://github.com/goofynugtz/Flipr-notesAPI-task.git
@@ -9,6 +9,8 @@ Create a virtual environment for running it locally without docker for debugging
 ```bash
 python -m venv venv && pip install -r requirements.txt
 ```
+For the purpose of task submission, The secret keys are exposed in .env.example file  
+Rename the .env.example to .env
 
 To start docker container 
 ```bash
@@ -56,5 +58,16 @@ The application supports CRUD operations at the following endpoints
 Check running instances and logs by  
 ```bash
 docker ps
+```
+```bash
+docker image
+```
+```bash
+docker container ls
+```
+```bash
+docker container ls -a
+```
+```bash
 docker logs [container_id]
 ```
