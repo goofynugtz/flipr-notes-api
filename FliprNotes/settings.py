@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
+from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,13 +21,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-q@%(8s++b33$8*1+vzyl#q*37z9^e+nbxeqw9wkki%d*f_+2pg')
-SECRET_KEY = os.environ.get('SECRET_KEY')
+# SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = config('SECRET_KEY')
+# print(SECRET_KEY)
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG  = os.environ.get('DEBUG')
+# DEBUG  = os.environ.get('DEBUG')
+DEBUG  = config('DEBUG')
 
 ALLOWED_HOSTS = ['*']
 if not DEBUG:
-    ALLOWED_HOSTS += [os.environ.get('ALLOWED_HOSTS')]
+    ALLOWED_HOSTS += [config('ALLOWED_HOSTS')]
 
 # Application definition
 
@@ -87,9 +91,9 @@ else:
     DATABASES = {        
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.environ.get('SQL_DBNAME'),
-            'USER': os.environ.get('SQL_USER'),
-            'PASSWORD': os.environ.get('SQL_PASSWORD'),
+            'NAME': config('SQL_DBNAME'),
+            'USER': config('SQL_USER'),
+            'PASSWORD': config('SQL_PASSWORD'),
             'HOST': 'db',
             'PORT': '5432',
         }

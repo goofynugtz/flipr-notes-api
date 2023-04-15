@@ -14,7 +14,7 @@ Rename the .env.example to .env
 
 To start docker container 
 ```bash
-docker-compose build && docker-compose up
+sudo docker-compose build && docker-compose up
 ```
 
 The application supports CRUD operations at the following endpoints  
@@ -57,17 +57,17 @@ The application supports CRUD operations at the following endpoints
 
 Check running instances and logs by  
 ```bash
-docker ps
+sudo docker ps
 ```
 ```bash
-docker image
+sudo docker image
 ```
 ```bash
-docker container ls
+sudo docker container ls
 ```
 ```bash
-docker container ls -a
+sudo docker container ls -a
 ```
 ```bash
-docker logs [container_id]
+sudo docker logs [container_id]
 ```
