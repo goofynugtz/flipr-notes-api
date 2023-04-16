@@ -14,7 +14,7 @@ Rename the .env.example to .env
 
 To start docker container 
 ```bash
-sudo docker-compose build && docker-compose up
+sudo docker-compose up --build
 ```
 
 The application supports CRUD operations at the following endpoints  
