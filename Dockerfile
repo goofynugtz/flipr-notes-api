@@ -10,3 +10,6 @@ RUN pip install -r /requirements.txt
 COPY . /
 RUN python manage.py collectstatic --no-input
 RUN python manage.py makemigrations --no-input && python manage.py migrate --no-input
+# ENTRYPOINT [ "bash","./script.sh" ]
+RUN apt-get -y install curl
+HEALTHCHECK CMD curl --fail http://localhost:8000/admin || exit 1
