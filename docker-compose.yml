@@ -31,6 +31,15 @@ services:
     depends_on:
       - web
 
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+    ports:
+      - 9090:9090
+    depends_on:
+      - web
+
 volumes:
   data:
   static:

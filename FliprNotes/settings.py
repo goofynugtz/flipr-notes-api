@@ -44,9 +44,11 @@ INSTALLED_APPS = [
 
     'api.apps.ApiConfig',
     'rest_framework',
+    'django_prometheus'
 ]
 
 MIDDLEWARE = [
+    'django_prometheus.middleware.PrometheusBeforeMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -54,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_prometheus.middleware.PrometheusAfterMiddleware',
 ]
 
 ROOT_URLCONF = 'FliprNotes.urls'
@@ -80,24 +83,24 @@ WSGI_APPLICATION = 'FliprNotes.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# if (DEBUG):
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if (DEBUG):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
-# else:
-#     DATABASES = {        
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql',
-#             'NAME': config('SQL_DBNAME'),
-#             'USER': config('SQL_USER'),
-#             'PASSWORD': config('SQL_PASSWORD'),
-#             'HOST': 'db',
-#             'PORT': '5430',
-#         }
-#     }
+else:
+    DATABASES = {        
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': config('SQL_DBNAME'),
+            'USER': config('SQL_USER'),
+            'PASSWORD': config('SQL_PASSWORD'),
+            'HOST': 'db',
+            'PORT': '5432',
+        }
+    }
 
 
 # Password validation
