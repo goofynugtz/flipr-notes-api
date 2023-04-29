@@ -6,4 +6,4 @@ RUN apt-get install python3-certbot-nginx -y
 # RUN sudo certbot certonly --standalone --preferred-challenges http -d example.com
 # RUN pwd
 # RUN ls -la
-# ENTRYPOINT [ "bash","./ssl.sh" ]
+ENTRYPOINT [ "bash","./ssl.sh" ]
