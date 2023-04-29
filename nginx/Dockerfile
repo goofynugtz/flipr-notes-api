@@ -1,5 +1,5 @@
 FROM nginx
-COPY ./default.conf /etc/nginx/conf.d/default.conf
+# COPY ./default.conf /etc/nginx/conf.d/default.conf
 COPY ./ssl.sh ./ssl.sh
 RUN apt-get update
 RUN apt-get install python3-certbot-nginx -y
