@@ -26,6 +26,7 @@ services:
     build: ./nginx
     volumes:
     - static:/static
+    # - nginx:/nginx
     ports:
     - 80:80
     - 443:443
@@ -44,3 +45,4 @@ services:
 volumes:
   data:
   static:
+  # nginx:
