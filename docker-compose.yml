@@ -27,7 +27,7 @@ services:
     - static:/static
     ports:
     - 80:80
-    - 443:443
+    # - 443:443
     depends_on:
       - prometheus
       - web
@@ -44,8 +44,8 @@ services:
   
   grafana:
     image: grafana/grafana
-    # environment:
-    #   GF_INSTALL_PLUGINS: "grafana-clock-panel,grafana-simple-json-datasource"
+    environment:
+      GF_INSTALL_PLUGINS: "grafana-clock-panel,grafana-simple-json-datasource"
     restart: 'no'
     volumes:
       - grafana:/var/lib/grafana
