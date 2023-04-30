@@ -3,7 +3,6 @@ version: '3'
 services:
   web:
     build: .
-    # command: python manage.py runserver 0.0.0.0:8000
     ports:
       - 8000:8000
     depends_on:
@@ -28,7 +27,9 @@ services:
     - static:/static
     ports:
     - 80:80
+    # - 443:443
     depends_on:
+      - prometheus
       - web
 
   prometheus:
@@ -39,7 +40,31 @@ services:
       - 9090:9090
     depends_on:
       - web
+      - cadvisor
+  
+  grafana:
+    image: grafana/grafana
+    environment:
+      GF_INSTALL_PLUGINS: "grafana-clock-panel,grafana-simple-json-datasource"
+    restart: 'no'
+    volumes:
+      - grafana:/var/lib/grafana
+    ports:
+      - 3000:3000
+    depends_on:
+      - prometheus
+    
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor
+    ports:
+      - 8080:8080
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
 
 volumes:
   data:
   static:
+  grafana:
