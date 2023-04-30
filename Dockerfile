@@ -8,6 +8,6 @@ RUN pip install --upgrade pip
 COPY ./requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
 COPY . /
-ENTRYPOINT [ "bash","./script.sh" ]
 RUN apt-get -y install curl
-HEALTHCHECK CMD curl --fail http://localhost:8000/admin || exit 1
+ENTRYPOINT [ "bash","./script.sh" ]
+HEALTHCHECK CMD curl --fail http://localhost:8000/api || exit 1
