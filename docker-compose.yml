@@ -39,15 +39,15 @@ services:
       - prometheus
       - web
 
-  certbot:
-    build: ./nginx
-    volumes:
-    - ./nginx/conf.d:/etc/nginx/conf.d
-    - ./nginx/certbot/conf:/etc/letsencrypt
-    - ./nginx/certbot/logs:/var/log/letsencrypt
-    - ./nginx/certbot/data:/usr/share/nginx/html/letsencrypt
-    depends_on:
-      - nginx
+  # certbot:
+  #   build: ./nginx
+  #   volumes:
+  #   - ./nginx/conf.d:/etc/nginx/conf.d
+  #   - ./nginx/certbot/conf:/etc/letsencrypt
+  #   - ./nginx/certbot/logs:/var/log/letsencrypt
+  #   - ./nginx/certbot/data:/usr/share/nginx/html/letsencrypt
+  #   depends_on:
+  #     - nginx
 
   prometheus:
     image: prom/prometheus
