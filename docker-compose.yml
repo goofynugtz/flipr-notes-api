@@ -37,7 +37,7 @@ services:
       - web
 
   certbot:
-    image: certbot/certbot:latest
+    build: ./certbot
     # command: certonly --webroot --webroot-path=/usr/share/nginx/html/letsencrypt --email rahulranjan25.RR@gmail.com --agree-tos --no-eff-email -d rahul-api.sr.flipr.ai -d rahul-grafana.sr.flipr.ai -d rahul-jenkins.sr.flipr.ai
     command: --nginx --non-interactive --agree-tos --email rahulranjan25.RR@gmail.com --no-eff-email -d rahul-api.sr.flipr.ai -d rahul-grafana.sr.flipr.ai -d rahul-jenkins.sr.flipr.ai
     volumes:
