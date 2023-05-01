@@ -41,7 +41,6 @@ services:
 
   certbot:
     build: ./nginx
-    restart: no
     volumes:
     - ./nginx/conf.d:/etc/nginx/conf.d
     - ./nginx/certbot/conf:/etc/letsencrypt
