@@ -23,14 +23,27 @@ services:
 
   nginx:
     build: ./nginx
+    restart: always
     volumes:
-    - static:/static
+    - ./public_html:/public_html
+    - ./nginx:/etc/nginx/conf.d
+    - ./dhparam:/etc/nginx/dhparam
+    - ./certbot/conf:/etc/nginx/ssl
+    - ./certbot/data:/usr/share/nginx/html/letsencrypt
     ports:
     - 80:80
     - 443:443
     depends_on:
       - prometheus
       - web
+
+  certbot:
+    image: certbot/certbot:latest
+    command: certonly --webroot --webroot-path=/usr/share/nginx/html/letsencrypt --email rahulranjan25.RR@gmail.com --agree-tos --no-eff-email -d rahul-api.sr.flipr.ai -d rahul-prometheus.sr.flipr.ai -d rahul-grafana.sr.flipr.ai -d rahul-cadvisor.sr.flipr.ai -d rahul-node.sr.flipr.ai
+    volumes:
+    - ./certbot/conf:/etc/letsencrypt
+    - ./certbot/logs:/var/log/letsencrypt
+    - ./certbot/data:/usr/share/nginx/html/letsencrypt
 
   prometheus:
     image: prom/prometheus
@@ -79,8 +92,16 @@ services:
       - "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
     ports:
       - 9100:9100
+  
+  jenkins:
+    image: jenkins/jenkins:lts-jdk11
+    ports:
+      - 8081:8080
+    volumes:
+      - jenkins:/var/jenkins_home
 
 volumes:
   data:
   static:
   grafana:
+  jenkins:
