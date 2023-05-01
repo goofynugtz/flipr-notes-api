@@ -1,7 +1,4 @@
-FROM nginx
-# COPY ./conf.d/default.conf /etc/nginx/conf.d/default.conf
-# COPY ./ssl.sh ./ssl.sh
-# ENTRYPOINT [ "bash","./ssl.sh" ]
-# RUN apt-get update
-# RUN apt-get -y install curl
-# HEALTHCHECK CMD curl --fail http://localhost || exit 1
+FROM python:3-slim-buster
+COPY ./ssl.sh ./ssl.sh
+RUN apt-get update
+ENTRYPOINT [ "bash","./ssl.sh" ]

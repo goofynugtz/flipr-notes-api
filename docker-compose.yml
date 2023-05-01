@@ -22,13 +22,14 @@ services:
       - 5432:5432
 
   nginx:
-    build: ./nginx
+    image: nginx
     restart: always
     volumes:
     - ./nginx/conf.d:/etc/nginx/conf.d
-    - ./dhparam:/etc/nginx/dhparam
-    - ./certbot/conf:/etc/letsencrypt
-    - ./certbot/data:/usr/share/nginx/html/letsencrypt
+    - ./nginx/dhparam:/etc/nginx/dhparam
+    - ./nginx/certbot/conf:/etc/letsencrypt
+    - ./nginx/certbot/logs:/var/log/letsencrypt
+    - ./nginx/certbot/data:/usr/share/nginx/html/letsencrypt
     ports:
     - 80:80
     - 443:443
@@ -37,13 +38,13 @@ services:
       - web
 
   certbot:
-    build: ./certbot
-    # command: certonly --webroot --webroot-path=/usr/share/nginx/html/letsencrypt --email rahulranjan25.RR@gmail.com --agree-tos --no-eff-email -d rahul-api.sr.flipr.ai -d rahul-grafana.sr.flipr.ai -d rahul-jenkins.sr.flipr.ai
-    command: --nginx --non-interactive --agree-tos --email rahulranjan25.RR@gmail.com --no-eff-email -d rahul-api.sr.flipr.ai -d rahul-grafana.sr.flipr.ai -d rahul-jenkins.sr.flipr.ai
+    build: ./nginx
     volumes:
-    - ./certbot/conf:/etc/letsencrypt
-    - ./certbot/logs:/var/log/letsencrypt
-    - ./certbot/data:/usr/share/nginx/html/letsencrypt
+    - ./nginx/certbot/conf:/etc/letsencrypt
+    - ./nginx/certbot/logs:/var/log/letsencrypt
+    - ./nginx/certbot/data:/usr/share/nginx/html/letsencrypt
+    depends_on:
+      - nginx
 
   prometheus:
     image: prom/prometheus
