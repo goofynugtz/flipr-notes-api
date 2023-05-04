@@ -8,30 +8,39 @@ pipeline {
   }
 
   stages {
-    stage('Cloning repository...') {
+    stage('SCM Checkout') {
       steps {
         git branch: 'master', url: 'https://github.com/goofynugtz/Flipr-notesAPI-task.git'
       }
     }
 
-    stage('Building Image...') {
+    stage('Building Docker image...') {
       steps {
         script {
-          docker.build("${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}")
+          sh "docker build -t ${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}"
         }
       }
     }
-    
-    stage("Login"){
-      steps{
-        bash "echo $DOCKER_CREDENTIALS_PSW | docker login -u $DOCKER_CREDENTIALS_USR --password-stdin"
+
+    stage('Login to Docker Hub') {      	
+      steps{                       	
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'                		
+        echo 'Login Completed'      
       }
     }
-    
-    stage("Push to DockerHub") {
+
+    stage('Uploading Image') {
       steps {
-        sh "docker push ${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}"
+        script {
+          sh "docker push ${DOCKER_REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG}"
+        }
       }
     }
   }
+
+  post{
+    always {  
+      sh 'docker logout'           
+    }      
+  } 
 }
