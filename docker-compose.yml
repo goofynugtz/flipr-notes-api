@@ -104,6 +104,7 @@ services:
     volumes:
       - jenkins:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
+    privileged: true
 
 volumes:
   data:
