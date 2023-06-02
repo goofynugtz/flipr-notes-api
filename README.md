@@ -71,3 +71,7 @@ sudo docker container ls -a
 ```bash
 sudo docker logs [container_id]
 ```
+To reset database container
+```bash
+sudo docker volume prune
+```
