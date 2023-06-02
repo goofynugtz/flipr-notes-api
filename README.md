@@ -75,3 +75,7 @@ To reset database container
 ```bash
 sudo docker volume prune
 ```
+To open sh inside a container 
+```bash
+sudo docker exec -it <container> sh
+```
