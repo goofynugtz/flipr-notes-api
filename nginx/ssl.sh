@@ -1,5 +1,6 @@
 #!/bin/sh
 
+apt-get update
 apt-get install python3-certbot-nginx -y
 
 certbot certonly --nginx --noninteractive --agree-tos -d rahul-api.sr.flipr.ai --register-unsafely-without-email
